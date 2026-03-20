@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.moneywise.moneywise.controller.InscriptionController"
+            prefWidth="900" prefHeight="600">
+    <center>
+        <VBox spacing="12" alignment="CENTER" maxWidth="380"
+              styleClass="carte-login">
+            <padding>
+                <Insets top="40" right="40" bottom="40" left="40"/>
+            </padding>
+
+            <Label text="💰 MoneyWise" styleClass="titre-app"/>
+            <Label text="Créez votre compte" styleClass="sous-titre"/>
+            <Region prefHeight="10"/>
+
+            <Label text="Nom complet" styleClass="label-champ"/>
+            <TextField fx:id="champNom" promptText="Votre nom"
+                       styleClass="champ-saisie"/>
+
+            <Label text="Email" styleClass="label-champ"/>
+            <TextField fx:id="champEmail" promptText="exemple@email.com"
+                       styleClass="champ-saisie"/>
+
+            <Label text="Mot de passe" styleClass="label-champ"/>
+            <PasswordField fx:id="champMdp" promptText="Votre mot de passe"
+                           styleClass="champ-saisie"/>
+
+            <Region prefHeight="5"/>
+
+            <Button text="Créer mon compte"
+                    maxWidth="Infinity"
+                    styleClass="btn-principal"
+                    onAction="#handleInscription"/>
+
+            <Hyperlink text="Déjà un compte ? Se connecter"
+                       styleClass="lien"
+                       onAction="#handleRetourLogin"/>
+
+            <Label fx:id="labelMessage" text=""/>
+        </VBox>
+    </center>
+</BorderPane>

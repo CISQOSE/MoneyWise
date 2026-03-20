@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════
+   MONEYWISE — Feuille de style principale
+   ═══════════════════════════════════════════ */
+
+/* ── Variables de couleurs (racine) ───────── */
+.root {
+    -fx-background-color: #1a1a2e;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ── Carte du formulaire ───────────────────── */
+.carte-login {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12px;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 5);
+}
+
+/* ── Titre principal ───────────────────────── */
+.titre-app {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1a2e;
+}
+
+/* ── Sous-titre ────────────────────────────── */
+.sous-titre {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+/* ── Labels des champs ─────────────────────── */
+.label-champ {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* ── Champs de saisie ──────────────────────── */
+.champ-saisie {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 8px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-pref-height: 40px;
+}
+
+.champ-saisie:focused {
+    -fx-border-color: #4361ee;
+    -fx-background-color: #ffffff;
+}
+
+/* ── Bouton principal ──────────────────────── */
+.btn-principal {
+    -fx-background-color: #4361ee;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+}
+
+.btn-principal:hover {
+    -fx-background-color: #3451d1;
+}
+
+.btn-principal:pressed {
+    -fx-background-color: #2a41c0;
+}
+
+/* ── Lien inscription ──────────────────────── */
+.lien {
+    -fx-text-fill: #4361ee;
+    -fx-font-size: 13px;
+}
+
+/* ── Message erreur ────────────────────────── */
+.message-erreur {
+    -fx-text-fill: #e63946;
+    -fx-font-size: 13px;
+}
+
+/* ── Message succès ────────────────────────── */
+.message-succes {
+    -fx-text-fill: #2dc653;
+    -fx-font-size: 13px;
+}

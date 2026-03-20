@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.moneywise.moneywise.controller.TransactionController"
+            prefWidth="900" prefHeight="600">
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <Label text="📊 Mes Transactions"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Button text="Retour au dashboard"
+                    onAction="#handleRetourDashboard"
+                    styleClass="btn-principal"/>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.moneywise.moneywise.controller.LoginController"
+            prefWidth="900" prefHeight="600">
+
+    <center>
+        <VBox spacing="12"
+              alignment="CENTER"
+              maxWidth="380"
+              styleClass="carte-login">
+
+            <padding>
+                <Insets top="40" right="40" bottom="40" left="40"/>
+            </padding>
+
+            <!-- Titre -->
+            <Label text="💰 MoneyWise"
+                   styleClass="titre-app"/>
+
+            <Label text="Connectez-vous à votre espace"
+                   styleClass="sous-titre"/>
+
+            <!-- Espacement -->
+            <Region prefHeight="10"/>
+
+            <!-- Champ Email -->
+            <Label text="Email" styleClass="label-champ"/>
+            <TextField fx:id="champEmail"
+                       promptText="exemple@email.com"
+                       styleClass="champ-saisie"/>
+
+            <!-- Champ Mot de passe -->
+            <Label text="Mot de passe" styleClass="label-champ"/>
+            <PasswordField fx:id="champMdp"
+                           promptText="Votre mot de passe"
+                           styleClass="champ-saisie"/>
+
+            <!-- Espacement -->
+            <Region prefHeight="5"/>
+
+            <!-- Bouton connexion -->
+            <Button fx:id="btnConnexion"
+                    text="Se connecter"
+                    maxWidth="Infinity"
+                    styleClass="btn-principal"
+                    onAction="#handleConnexion"/>
+
+            <!-- Lien inscription -->
+            <Hyperlink text="Pas encore de compte ? S'inscrire"
+                       styleClass="lien"
+                       onAction="#handleInscription"/>
+
+            <!-- Message erreur/succès -->
+            <Label fx:id="labelMessage"
+                   text=""
+                   styleClass="message-erreur"/>
+
+        </VBox>
+    </center>
+
+</BorderPane>
