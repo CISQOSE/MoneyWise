@@ -2,6 +2,7 @@ package com.moneywise.moneywise.controller;
 
 import com.moneywise.moneywise.model.Transaction;
 import com.moneywise.moneywise.model.Transaction.TypeTransaction;
+import com.moneywise.moneywise.service.AlerteService;
 import com.moneywise.moneywise.service.TransactionService;
 import com.moneywise.moneywise.util.SceneManager;
 import com.moneywise.moneywise.util.SessionManager;
@@ -9,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +54,9 @@ public class DashboardController {
         // Charge les graphiques
         chargerBarChart(userId);
         chargerPieChart(userId);
+
+        // ✅ Ajoute cet appel à la fin
+        chargerAlertes(userId);
     }
 
     // ── BarChart : Revenus vs Dépenses ────────────────────
@@ -128,5 +133,51 @@ public class DashboardController {
     private void handleDeconnexion() {
         SessionManager.getInstance().fermerSession();
         SceneManager.getInstance().allerVersLogin();
+    }
+
+    // ── Nouveau composant FXML ────────────────────────────
+    @FXML private VBox zoneAlertes;
+
+    // ── Nouveau service ───────────────────────────────────
+    private final AlerteService alerteService = new AlerteService();
+
+    // ── Charge et affiche les alertes ─────────────────────
+    private void chargerAlertes(int userId) {
+        List<AlerteService.Alerte> alertes =
+                alerteService.verifierAlertes(userId);
+
+        zoneAlertes.getChildren().clear();
+
+        if (!alertes.isEmpty()) {
+            // Rend la zone visible
+            zoneAlertes.setVisible(true);
+            zoneAlertes.setManaged(true);
+
+            for (AlerteService.Alerte alerte : alertes) {
+
+                // Couleur selon le niveau
+                String couleur = alerte.getNiveau() ==
+                        AlerteService.Alerte.NiveauAlerte.DEPASSE
+                        ? "#e63946" : "#f4a261";
+
+                // Crée le label d'alerte
+                Label labelAlerte = new Label(alerte.getMessage());
+                labelAlerte.setMaxWidth(Double.MAX_VALUE);
+                labelAlerte.setStyle(
+                        "-fx-background-color: " + couleur + "22;" +
+                                "-fx-border-color: " + couleur + ";" +
+                                "-fx-border-radius: 6px;" +
+                                "-fx-background-radius: 6px;" +
+                                "-fx-padding: 10px;" +
+                                "-fx-text-fill: " + couleur + ";" +
+                                "-fx-font-weight: bold;"
+                );
+
+                zoneAlertes.getChildren().add(labelAlerte);
+            }
+        } else {
+            zoneAlertes.setVisible(false);
+            zoneAlertes.setManaged(false);
+        }
     }
 }

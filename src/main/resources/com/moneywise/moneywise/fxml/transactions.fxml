@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.moneywise.moneywise.controller.TransactionController"
             prefWidth="900" prefHeight="600">
+
+    <!-- ══ HAUT : barre de navigation ══ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: #1a1a2e; -fx-padding: 15px;">
+            <Label text="💰 MoneyWise"
+                   style="-fx-text-fill: white; -fx-font-size: 20px;
+                          -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="🏠 Dashboard"
+                    onAction="#handleDashboard"
+                    style="-fx-background-color: #4361ee; -fx-text-fill: white;
+                           -fx-background-radius: 6px;"/>
+            <Button text="Déconnexion"
+                    onAction="#handleDeconnexion"
+                    style="-fx-background-color: #e63946; -fx-text-fill: white;
+                           -fx-background-radius: 6px;"/>
+        </HBox>
+    </top>
+
+    <!-- ══ CENTRE ══ -->
     <center>
-        <VBox alignment="CENTER" spacing="20">
-            <Label text="📊 Mes Transactions"
-                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-            <Button text="Retour au dashboard"
-                    onAction="#handleRetourDashboard"
-                    styleClass="btn-principal"/>
+        <VBox spacing="20"
+              style="-fx-padding: 25px; -fx-background-color: #f0f2f5;">
+
+            <!-- Titre + bouton Ajouter -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="💸 Mes Transactions"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="+ Ajouter une transaction"
+                        onAction="#handleAjouter"
+                        style="-fx-background-color: #4361ee; -fx-text-fill: white;
+                               -fx-background-radius: 6px; -fx-padding: 10px 15px;"/>
+            </HBox>
+
+            <!-- Tableau des transactions -->
+            <TableView fx:id="tableTransactions" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: white;
+                              -fx-background-radius: 10px;">
+                <columns>
+                    <TableColumn fx:id="colDate"
+                                 text="Date" prefWidth="120"/>
+                    <TableColumn fx:id="colDescription"
+                                 text="Description" prefWidth="250"/>
+                    <TableColumn fx:id="colMontant"
+                                 text="Montant" prefWidth="120"/>
+                    <TableColumn fx:id="colType"
+                                 text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="colActions"
+                                 text="Actions" prefWidth="120"/>
+                </columns>
+            </TableView>
+
         </VBox>
     </center>
+
 </BorderPane>

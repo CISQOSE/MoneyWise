@@ -102,7 +102,11 @@
                                   -fx-text-fill: #e63946;"/>
                 </VBox>
 
+
             </HBox>
+
+            <!-- ══ Zone des alertes ══ -->
+            <VBox fx:id="zoneAlertes" spacing="8" managed="false" visible="false"/>
 
             <!-- Graphiques -->
             <HBox spacing="15" VBox.vgrow="ALWAYS">

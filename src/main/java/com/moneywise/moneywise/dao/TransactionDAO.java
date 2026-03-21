@@ -81,4 +81,43 @@ public class TransactionDAO {
         t.setCategorieId(rs.getInt("categorie_id"));
         return t;
     }
+
+    // ══════════════════════════════════════════════
+    //  UPDATE — Modifier une transaction
+    // ══════════════════════════════════════════════
+    public boolean modifier(Transaction t) {
+        String sql = "UPDATE transaction SET montant=?, type=?, date=?, "
+                + "description=?, categorie_id=? WHERE id=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, t.getMontant());
+            stmt.setString(2, t.getType().name());
+            stmt.setDate(3, Date.valueOf(t.getDate()));
+            stmt.setString(4, t.getDescription());
+            stmt.setInt(5, t.getCategorieId());
+            stmt.setInt(6, t.getId());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur modification transaction : " + e.getMessage());
+            return false;
+        }
+    }
+
+    // ══════════════════════════════════════════════
+    //  DELETE — Supprimer une transaction
+    // ══════════════════════════════════════════════
+    public boolean supprimer(int id) {
+        String sql = "DELETE FROM transaction WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur suppression transaction : " + e.getMessage());
+            return false;
+        }
+    }
 }
