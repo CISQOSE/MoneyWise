@@ -51,6 +51,14 @@ public class SceneManager {
         chargerScene("/com/moneywise/moneywise/fxml/transactions.fxml", "MoneyWise — Transactions");
     }
 
+    public void allerVersExport() {
+        chargerScene("/com/moneywise/moneywise/fxml/export.fxml", "MoneyWise — Export");
+    }
+
+    public void allerVersAdmin() {
+        chargerScene("/com/moneywise/moneywise/fxml/admin.fxml", "MoneyWise — Administration");
+    }
+
     // ── Méthode centrale de chargement ─────────────────────
     private void chargerScene(String cheminFxml, String titre) {
         try {

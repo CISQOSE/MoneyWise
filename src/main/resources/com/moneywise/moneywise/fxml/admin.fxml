@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.moneywise.moneywise.controller.AdminController"
+            prefWidth="900" prefHeight="600">
+
+    <!-- ══ HAUT ══ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: #1a1a2e; -fx-padding: 15px;">
+            <Label text="💰 MoneyWise — Administration"
+                   style="-fx-text-fill: white; -fx-font-size: 18px;
+                          -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="🏠 Dashboard"
+                    onAction="#handleDashboard"
+                    style="-fx-background-color: #4361ee; -fx-text-fill: white;
+                           -fx-background-radius: 6px;"/>
+            <Button text="Déconnexion"
+                    onAction="#handleDeconnexion"
+                    style="-fx-background-color: #e63946; -fx-text-fill: white;
+                           -fx-background-radius: 6px;"/>
+        </HBox>
+    </top>
+
+    <!-- ══ CENTRE ══ -->
+    <center>
+        <VBox spacing="20"
+              style="-fx-padding: 25px; -fx-background-color: #f0f2f5;">
+
+            <!-- Titre + stats -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="👥 Gestion des utilisateurs"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="labelStats"
+                       style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+            </HBox>
+
+            <!-- Tableau des utilisateurs -->
+            <TableView fx:id="tableUtilisateurs" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: white;
+                              -fx-background-radius: 10px;">
+                <columns>
+                    <TableColumn fx:id="colId"
+                                 text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colNom"
+                                 text="Nom" prefWidth="150"/>
+                    <TableColumn fx:id="colEmail"
+                                 text="Email" prefWidth="200"/>
+                    <TableColumn fx:id="colStatut"
+                                 text="Statut" prefWidth="100"/>
+                    <TableColumn fx:id="colRole"
+                                 text="Rôle" prefWidth="100"/>
+                    <TableColumn fx:id="colActions"
+                                 text="Actions" prefWidth="200"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

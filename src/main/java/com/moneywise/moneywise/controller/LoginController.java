@@ -26,6 +26,11 @@ public class LoginController {
         if (resultat.isSucces()) {
             // Ouvre la session avec l'utilisateur connecté
             SessionManager.getInstance().ouvrirSession(resultat.getUtilisateur());
+
+            // ← Ajoute cette ligne temporairement
+            System.out.println("Est admin : " +
+                    SessionManager.getInstance().estAdmin());
+
             // Navigue vers le dashboard
             SceneManager.getInstance().allerVersDashboard();
         } else {
@@ -42,4 +47,5 @@ public class LoginController {
         labelMessage.setStyle("-fx-text-fill: red;");
         labelMessage.setText(message);
     }
+
 }

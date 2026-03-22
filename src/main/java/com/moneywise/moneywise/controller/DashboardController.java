@@ -135,6 +135,19 @@ public class DashboardController {
         SceneManager.getInstance().allerVersLogin();
     }
 
+    @FXML
+    private void handleExport() {
+        SceneManager.getInstance().allerVersExport();
+    }
+
+    @FXML
+    private void handleAdmin() {
+        // Vérifie que l'utilisateur est admin avant de naviguer
+        if (SessionManager.getInstance().estAdmin()) {
+            SceneManager.getInstance().allerVersAdmin();
+        }
+    }
+
     // ── Nouveau composant FXML ────────────────────────────
     @FXML private VBox zoneAlertes;
 
@@ -180,4 +193,5 @@ public class DashboardController {
             zoneAlertes.setManaged(false);
         }
     }
+
 }

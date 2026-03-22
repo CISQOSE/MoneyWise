@@ -57,8 +57,15 @@
 
             <Button text="📤 Export"
                     maxWidth="Infinity"
+                    onAction="#handleExport"
                     style="-fx-background-color: transparent; -fx-text-fill: white;
                            -fx-background-radius: 6px; -fx-padding: 10px;"/>
+
+            <Button text="⚙️ Admin"
+                    maxWidth="Infinity"
+                    onAction="#handleAdmin"
+                    style="-fx-background-color: #f4a261; -fx-text-fill: white;
+               -fx-background-radius: 6px; -fx-padding: 10px;"/>
         </VBox>
     </left>
 
