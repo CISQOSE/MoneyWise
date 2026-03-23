@@ -6,41 +6,43 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.moneywise.moneywise.controller.FormBudgetController"
-      spacing="15" prefWidth="400"
-      style="-fx-padding: 30px; -fx-background-color: white;">
+      spacing="14" styleClass="form-popup">
 
-    <Label text="Nouveau Budget"
-           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
 
-    <Label text="Montant maximum (€)" style="-fx-font-weight: bold;"/>
+    <Label text="Nouveau Budget" styleClass="form-popup-titre"/>
+    <Region prefHeight="6"/>
+
+    <Label text="Montant maximum (E)" styleClass="form-label"/>
     <TextField fx:id="champMontant"
-               promptText="Ex: 500.00"
+               promptText="Ex : 500.00"
                styleClass="champ-saisie"/>
 
-    <Label text="Mois" style="-fx-font-weight: bold;"/>
+    <Label text="Mois" styleClass="form-label"/>
     <ComboBox fx:id="comboMois" maxWidth="Infinity"/>
 
-    <Label text="Année" style="-fx-font-weight: bold;"/>
+    <Label text="Annee" styleClass="form-label"/>
     <TextField fx:id="champAnnee"
-               promptText="Ex: 2026"
+               promptText="Ex : 2026"
                styleClass="champ-saisie"/>
 
-    <Label fx:id="labelMessage" text=""/>
+    <Label fx:id="labelMessage" text="" styleClass="msg-erreur" wrapText="true"/>
+    <Region prefHeight="4"/>
 
-    <HBox spacing="10">
+    <HBox spacing="12">
         <Button fx:id="btnSauvegarder"
                 text="Sauvegarder"
                 onAction="#handleSauvegarder"
                 maxWidth="Infinity"
                 HBox.hgrow="ALWAYS"
-                style="-fx-background-color: #4361ee; -fx-text-fill: white;
-                       -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                styleClass="btn-primary"/>
         <Button text="Annuler"
                 onAction="#handleAnnuler"
                 maxWidth="Infinity"
                 HBox.hgrow="ALWAYS"
-                style="-fx-background-color: #e63946; -fx-text-fill: white;
-                       -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                styleClass="btn-ghost"/>
     </HBox>
 
 </VBox>

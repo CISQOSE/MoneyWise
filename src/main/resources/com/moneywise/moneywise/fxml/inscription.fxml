@@ -4,44 +4,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.moneywise.moneywise.controller.InscriptionController"
-            prefWidth="900" prefHeight="600">
-    <center>
-        <VBox spacing="12" alignment="CENTER" maxWidth="380"
-              styleClass="carte-login">
-            <padding>
-                <Insets top="40" right="40" bottom="40" left="40"/>
-            </padding>
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.moneywise.moneywise.controller.InscriptionController"
+           prefWidth="900" prefHeight="600"
+           styleClass="login-bg">
 
-            <Label text="💰 MoneyWise" styleClass="titre-app"/>
-            <Label text="Créez votre compte" styleClass="sous-titre"/>
-            <Region prefHeight="10"/>
+    <VBox alignment="CENTER" spacing="0"
+          styleClass="login-card"
+          maxWidth="420">
 
-            <Label text="Nom complet" styleClass="label-champ"/>
-            <TextField fx:id="champNom" promptText="Votre nom"
+        <padding>
+            <Insets top="40" right="44" bottom="40" left="44"/>
+        </padding>
+
+        <Label text="MoneyWise" styleClass="login-titre"/>
+        <Region prefHeight="6"/>
+        <Label text="Creez votre compte gratuitement" styleClass="login-sous-titre"/>
+
+        <Region prefHeight="26"/>
+
+        <Label text="Nom complet" styleClass="form-label"/>
+        <Region prefHeight="6"/>
+        <TextField fx:id="champNom"
+                   promptText="Votre prenom et nom"
+                   styleClass="champ-saisie"/>
+
+        <Region prefHeight="16"/>
+
+        <Label text="Adresse email" styleClass="form-label"/>
+        <Region prefHeight="6"/>
+        <TextField fx:id="champEmail"
+                   promptText="vous@exemple.com"
+                   styleClass="champ-saisie"/>
+
+        <Region prefHeight="16"/>
+
+        <Label text="Mot de passe" styleClass="form-label"/>
+        <Region prefHeight="6"/>
+        <PasswordField fx:id="champMdp"
+                       promptText="Minimum 6 caracteres"
                        styleClass="champ-saisie"/>
 
-            <Label text="Email" styleClass="label-champ"/>
-            <TextField fx:id="champEmail" promptText="exemple@email.com"
-                       styleClass="champ-saisie"/>
+        <Region prefHeight="26"/>
 
-            <Label text="Mot de passe" styleClass="label-champ"/>
-            <PasswordField fx:id="champMdp" promptText="Votre mot de passe"
-                           styleClass="champ-saisie"/>
+        <Button text="Creer mon compte"
+                maxWidth="Infinity"
+                styleClass="btn-primary"
+                onAction="#handleInscription"/>
 
-            <Region prefHeight="5"/>
+        <Region prefHeight="16"/>
 
-            <Button text="Créer mon compte"
-                    maxWidth="Infinity"
-                    styleClass="btn-principal"
-                    onAction="#handleInscription"/>
-
-            <Hyperlink text="Déjà un compte ? Se connecter"
-                       styleClass="lien"
+        <HBox alignment="CENTER">
+            <Hyperlink text="Deja un compte ? Se connecter"
+                       styleClass="hyperlink"
                        onAction="#handleRetourLogin"/>
+        </HBox>
 
-            <Label fx:id="labelMessage" text=""/>
-        </VBox>
-    </center>
-</BorderPane>
+        <Region prefHeight="6"/>
+
+        <Label fx:id="labelMessage" text=""
+               styleClass="msg-erreur"
+               wrapText="true"/>
+
+    </VBox>
+
+</StackPane>

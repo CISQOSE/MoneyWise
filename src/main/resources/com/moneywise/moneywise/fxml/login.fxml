@@ -4,63 +4,61 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.moneywise.moneywise.controller.LoginController"
-            prefWidth="900" prefHeight="600">
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.moneywise.moneywise.controller.LoginController"
+           prefWidth="900" prefHeight="600"
+           styleClass="login-bg">
 
-    <center>
-        <VBox spacing="12"
-              alignment="CENTER"
-              maxWidth="380"
-              styleClass="carte-login">
+    <VBox alignment="CENTER" spacing="0"
+          styleClass="login-card"
+          maxWidth="420">
 
-            <padding>
-                <Insets top="40" right="40" bottom="40" left="40"/>
-            </padding>
+        <padding>
+            <Insets top="44" right="44" bottom="44" left="44"/>
+        </padding>
 
-            <!-- Titre -->
-            <Label text="💰 MoneyWise"
-                   styleClass="titre-app"/>
+        <Label text="MoneyWise" styleClass="login-titre"/>
+        <Region prefHeight="6"/>
+        <Label text="Connectez-vous a votre espace" styleClass="login-sous-titre"/>
 
-            <Label text="Connectez-vous à votre espace"
-                   styleClass="sous-titre"/>
+        <Region prefHeight="30"/>
 
-            <!-- Espacement -->
-            <Region prefHeight="10"/>
+        <Label text="Adresse email" styleClass="form-label"/>
+        <Region prefHeight="6"/>
+        <TextField fx:id="champEmail"
+                   promptText="vous@exemple.com"
+                   styleClass="champ-saisie"/>
 
-            <!-- Champ Email -->
-            <Label text="Email" styleClass="label-champ"/>
-            <TextField fx:id="champEmail"
-                       promptText="exemple@email.com"
+        <Region prefHeight="18"/>
+
+        <Label text="Mot de passe" styleClass="form-label"/>
+        <Region prefHeight="6"/>
+        <PasswordField fx:id="champMdp"
+                       promptText="Votre mot de passe"
                        styleClass="champ-saisie"/>
 
-            <!-- Champ Mot de passe -->
-            <Label text="Mot de passe" styleClass="label-champ"/>
-            <PasswordField fx:id="champMdp"
-                           promptText="Votre mot de passe"
-                           styleClass="champ-saisie"/>
+        <Region prefHeight="26"/>
 
-            <!-- Espacement -->
-            <Region prefHeight="5"/>
+        <Button fx:id="btnConnexion"
+                text="Se connecter"
+                maxWidth="Infinity"
+                styleClass="btn-primary"
+                onAction="#handleConnexion"/>
 
-            <!-- Bouton connexion -->
-            <Button fx:id="btnConnexion"
-                    text="Se connecter"
-                    maxWidth="Infinity"
-                    styleClass="btn-principal"
-                    onAction="#handleConnexion"/>
+        <Region prefHeight="16"/>
 
-            <!-- Lien inscription -->
+        <HBox alignment="CENTER">
             <Hyperlink text="Pas encore de compte ? S'inscrire"
-                       styleClass="lien"
+                       styleClass="hyperlink"
                        onAction="#handleInscription"/>
+        </HBox>
 
-            <!-- Message erreur/succès -->
-            <Label fx:id="labelMessage"
-                   text=""
-                   styleClass="message-erreur"/>
+        <Region prefHeight="6"/>
 
-        </VBox>
-    </center>
+        <Label fx:id="labelMessage" text=""
+               styleClass="msg-erreur"
+               wrapText="true"/>
 
-</BorderPane>
+    </VBox>
+
+</StackPane>

@@ -20,21 +20,15 @@ public class LoginController {
         String email = champEmail.getText().trim();
         String mdp   = champMdp.getText().trim();
 
-        // Appelle le service d'authentification
         ResultatAuth resultat = authService.connecter(email, mdp);
 
         if (resultat.isSucces()) {
-            // Ouvre la session avec l'utilisateur connecté
             SessionManager.getInstance().ouvrirSession(resultat.getUtilisateur());
-
-            // ← Ajoute cette ligne temporairement
-            System.out.println("Est admin : " +
-                    SessionManager.getInstance().estAdmin());
-
-            // Navigue vers le dashboard
             SceneManager.getInstance().allerVersDashboard();
         } else {
-            afficherErreur(resultat.getMessage());
+            labelMessage.getStyleClass().removeAll("msg-succes", "msg-info");
+            labelMessage.getStyleClass().add("msg-erreur");
+            labelMessage.setText(resultat.getMessage());
         }
     }
 
@@ -42,10 +36,4 @@ public class LoginController {
     private void handleInscription() {
         SceneManager.getInstance().allerVersInscription();
     }
-
-    private void afficherErreur(String message) {
-        labelMessage.setStyle("-fx-text-fill: red;");
-        labelMessage.setText(message);
-    }
-
 }

@@ -6,44 +6,46 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.moneywise.moneywise.controller.FormTransactionController"
-      spacing="15" prefWidth="400"
-      style="-fx-padding: 30px; -fx-background-color: white;">
+      spacing="14" styleClass="form-popup">
 
-    <Label text="Nouvelle Transaction"
-           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
 
-    <Label text="Montant (€)" style="-fx-font-weight: bold;"/>
+    <Label text="Nouvelle Transaction" styleClass="form-popup-titre"/>
+    <Region prefHeight="6"/>
+
+    <Label text="Montant (E)" styleClass="form-label"/>
     <TextField fx:id="champMontant"
-               promptText="Ex: 150.50"
+               promptText="Ex : 150.50"
                styleClass="champ-saisie"/>
 
-    <Label text="Description" style="-fx-font-weight: bold;"/>
+    <Label text="Description" styleClass="form-label"/>
     <TextField fx:id="champDescription"
-               promptText="Ex: Courses alimentaires"
+               promptText="Ex : Courses alimentaires"
                styleClass="champ-saisie"/>
 
-    <Label text="Type" style="-fx-font-weight: bold;"/>
+    <Label text="Type de transaction" styleClass="form-label"/>
     <ComboBox fx:id="comboType" maxWidth="Infinity"/>
 
-    <Label text="Date" style="-fx-font-weight: bold;"/>
+    <Label text="Date" styleClass="form-label"/>
     <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
 
-    <Label fx:id="labelMessage" text=""/>
+    <Label fx:id="labelMessage" text="" styleClass="msg-erreur" wrapText="true"/>
+    <Region prefHeight="4"/>
 
-    <HBox spacing="10">
+    <HBox spacing="12">
         <Button fx:id="btnSauvegarder"
                 text="Sauvegarder"
                 onAction="#handleSauvegarder"
                 maxWidth="Infinity"
                 HBox.hgrow="ALWAYS"
-                style="-fx-background-color: #4361ee; -fx-text-fill: white;
-                       -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                styleClass="btn-primary"/>
         <Button text="Annuler"
                 onAction="#handleAnnuler"
                 maxWidth="Infinity"
                 HBox.hgrow="ALWAYS"
-                style="-fx-background-color: #e63946; -fx-text-fill: white;
-                       -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                styleClass="btn-ghost"/>
     </HBox>
 
 </VBox>

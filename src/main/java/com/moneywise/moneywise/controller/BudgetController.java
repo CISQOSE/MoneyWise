@@ -29,7 +29,7 @@ public class BudgetController {
     @FXML private TableColumn<Budget, String> colPourcentage;
     @FXML private TableColumn<Budget, String> colActions;
 
-    private final BudgetDAO budgetDAO         = new BudgetDAO();
+    private final BudgetDAO budgetDAO           = new BudgetDAO();
     private final TransactionDAO transactionDAO = new TransactionDAO();
 
     @FXML
@@ -44,21 +44,18 @@ public class BudgetController {
                 new SimpleStringProperty(data.getValue().getMois()));
 
         colAnnee.setCellValueFactory(data ->
-                new SimpleStringProperty(
-                        String.valueOf(data.getValue().getAnnee())));
+                new SimpleStringProperty(String.valueOf(data.getValue().getAnnee())));
 
         colMontantMax.setCellValueFactory(data ->
                 new SimpleStringProperty(
                         String.format("%.2f €", data.getValue().getMontantMax())));
 
-        // Colonne Dépenses — calcule en temps réel
+        // Colonne Dépenses
         colDepenses.setCellValueFactory(data -> {
             Budget b = data.getValue();
-            int userId = SessionManager.getInstance()
-                    .getUtilisateurConnecte().getId();
+            int userId = SessionManager.getInstance().getUtilisateurConnecte().getId();
             double depenses = calculerDepenses(b, userId);
-            return new SimpleStringProperty(
-                    String.format("%.2f €", depenses));
+            return new SimpleStringProperty(String.format("%.2f €", depenses));
         });
 
         // Colonne Pourcentage avec couleur
@@ -80,25 +77,22 @@ public class BudgetController {
                     setText(String.format("%.0f%%", pourcentage));
 
                     if (pourcentage >= 100) {
-                        setStyle("-fx-text-fill: #e63946; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: #EF4444; -fx-font-weight: bold;");
                     } else if (pourcentage >= 80) {
-                        setStyle("-fx-text-fill: #f4a261; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: #F59E0B; -fx-font-weight: bold;");
                     } else {
-                        setStyle("-fx-text-fill: #2dc653; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: #22C55E; -fx-font-weight: bold;");
                     }
                 }
             }
         });
-        colPourcentage.setCellValueFactory(data ->
-                new SimpleStringProperty(""));
+        colPourcentage.setCellValueFactory(data -> new SimpleStringProperty(""));
 
         // Colonne Actions
         colActions.setCellFactory(col -> new TableCell<>() {
             private final Button btnSupprimer = new Button("🗑️");
             {
-                btnSupprimer.setStyle(
-                        "-fx-background-color: #e63946; -fx-text-fill: white;" +
-                                "-fx-background-radius: 4px; -fx-cursor: hand;");
+                btnSupprimer.getStyleClass().add("btn-icon-delete");
                 btnSupprimer.setOnAction(e -> {
                     Budget b = getTableRow().getItem();
                     if (b != null) confirmerSuppression(b);
@@ -111,14 +105,11 @@ public class BudgetController {
                 setGraphic(empty ? null : btnSupprimer);
             }
         });
-        colActions.setCellValueFactory(data ->
-                new SimpleStringProperty(""));
+        colActions.setCellValueFactory(data -> new SimpleStringProperty(""));
     }
 
-    // Calcule les dépenses réelles pour un budget
     private double calculerDepenses(Budget b, int userId) {
-        List<Transaction> transactions =
-                transactionDAO.trouverParUtilisateur(userId);
+        List<Transaction> transactions = transactionDAO.trouverParUtilisateur(userId);
         return transactions.stream()
                 .filter(t -> t.getType() == TypeTransaction.SORTIE)
                 .filter(t -> t.getCategorieId() == b.getCategorieId())
@@ -127,8 +118,7 @@ public class BudgetController {
     }
 
     private void chargerBudgets() {
-        int userId = SessionManager.getInstance()
-                .getUtilisateurConnecte().getId();
+        int userId = SessionManager.getInstance().getUtilisateurConnecte().getId();
         List<Budget> liste = budgetDAO.trouverParUtilisateur(userId);
         tableBudgets.setItems(FXCollections.observableArrayList(liste));
     }
@@ -141,7 +131,6 @@ public class BudgetController {
                 " — " + String.format("%.2f €", b.getMontantMax()));
         alert.showAndWait().ifPresent(rep -> {
             if (rep == ButtonType.OK) {
-                // On désactive plutôt que supprimer
                 b.setEstActif(false);
                 chargerBudgets();
             }
@@ -155,21 +144,18 @@ public class BudgetController {
                     getClass().getResource(
                             "/com/moneywise/moneywise/fxml/form_budget.fxml")
             );
-            // ✅ Après : taille adaptée au contenu
+
+            // ✅ Configuration unique — pas de duplication
             Stage popup = new Stage();
             popup.setTitle("Nouveau Budget");
-            Scene scene = new Scene(loader.load(), 450, 475);
-            popup.setScene(scene);
-            popup.setMinWidth(450);
-            popup.setMinHeight(475);
-            popup.centerOnScreen();
-            popup.initModality(Modality.APPLICATION_MODAL);
 
+            Scene scene = new Scene(loader.load(), 450, 475);
             scene.getStylesheets().add(
                     getClass().getResource(
                             "/com/moneywise/moneywise/css/style.css"
                     ).toExternalForm()
             );
+
             popup.setScene(scene);
             popup.setMinWidth(450);
             popup.setMinHeight(475);
@@ -186,13 +172,11 @@ public class BudgetController {
         }
     }
 
-    @FXML
-    private void handleDashboard() {
+    @FXML private void handleDashboard() {
         SceneManager.getInstance().allerVersDashboard();
     }
 
-    @FXML
-    private void handleDeconnexion() {
+    @FXML private void handleDeconnexion() {
         SessionManager.getInstance().fermerSession();
         SceneManager.getInstance().allerVersLogin();
     }

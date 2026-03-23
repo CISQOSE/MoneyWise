@@ -90,12 +90,8 @@ public class TransactionController {
 
             {
                 // Style des boutons
-                btnModifier.setStyle(
-                        "-fx-background-color: #4361ee; -fx-text-fill: white;" +
-                                "-fx-background-radius: 4px; -fx-cursor: hand;");
-                btnSupprimer.setStyle(
-                        "-fx-background-color: #e63946; -fx-text-fill: white;" +
-                                "-fx-background-radius: 4px; -fx-cursor: hand;");
+                btnModifier.getStyleClass().add("btn-icon-edit");
+                btnSupprimer.getStyleClass().add("btn-icon-delete");
 
                 // Clic Modifier
                 btnModifier.setOnAction(e -> {

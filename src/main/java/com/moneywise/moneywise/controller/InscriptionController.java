@@ -25,11 +25,11 @@ public class InscriptionController {
         ResultatAuth resultat = authService.inscrire(nom, email, mdp);
 
         if (resultat.isSucces()) {
-            // Connecte automatiquement après inscription
             SessionManager.getInstance().ouvrirSession(resultat.getUtilisateur());
             SceneManager.getInstance().allerVersDashboard();
         } else {
-            labelMessage.setStyle("-fx-text-fill: red;");
+            labelMessage.getStyleClass().removeAll("msg-succes", "msg-info");
+            labelMessage.getStyleClass().add("msg-erreur");
             labelMessage.setText(resultat.getMessage());
         }
     }

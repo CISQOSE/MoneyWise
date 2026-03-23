@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 public class FormTransactionController {
 
-    // ── Composants FXML ───────────────────────────────────
     @FXML private TextField champMontant;
     @FXML private TextField champDescription;
     @FXML private ComboBox<String> comboType;
@@ -21,23 +20,16 @@ public class FormTransactionController {
     @FXML private Button btnSauvegarder;
 
     private final TransactionDAO transactionDAO = new TransactionDAO();
-
-    // Transaction en cours de modification (null = ajout)
     private Transaction transactionAModifier;
-
-    // Callback : appelé après sauvegarde pour rafraîchir la liste
     private Runnable onSauvegarde;
 
-    // ── Initialisation ────────────────────────────────────
     @FXML
     private void initialize() {
-        // Remplit le ComboBox avec les types
         comboType.getItems().addAll("ENTREE", "SORTIE");
-        comboType.setValue("SORTIE"); // valeur par défaut
-        datePicker.setValue(LocalDate.now()); // date du jour par défaut
+        comboType.setValue("SORTIE");
+        datePicker.setValue(LocalDate.now());
     }
 
-    // ── Pré-remplir le formulaire pour la modification ────
     public void setTransactionAModifier(Transaction t) {
         this.transactionAModifier = t;
         champMontant.setText(String.valueOf(t.getMontant()));
@@ -51,17 +43,14 @@ public class FormTransactionController {
         this.onSauvegarde = callback;
     }
 
-    // ── Sauvegarde ────────────────────────────────────────
     @FXML
     private void handleSauvegarder() {
 
-        // Validation
         if (champMontant.getText().isBlank() ||
                 champDescription.getText().isBlank() ||
                 comboType.getValue() == null ||
                 datePicker.getValue() == null) {
-            labelMessage.setText("Veuillez remplir tous les champs.");
-            labelMessage.setStyle("-fx-text-fill: red;");
+            afficherErreur("Veuillez remplir tous les champs.");
             return;
         }
 
@@ -70,29 +59,24 @@ public class FormTransactionController {
             montant = Double.parseDouble(champMontant.getText().trim());
             if (montant <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            labelMessage.setText("Montant invalide (ex: 150.50)");
-            labelMessage.setStyle("-fx-text-fill: red;");
+            afficherErreur("Montant invalide (ex: 150.50)");
             return;
         }
 
-        int userId = SessionManager.getInstance()
-                .getUtilisateurConnecte().getId();
-
+        int userId = SessionManager.getInstance().getUtilisateurConnecte().getId();
         boolean succes;
 
         if (transactionAModifier == null) {
-            // ── MODE AJOUT ────────────────────────────────
             Transaction nouvelle = new Transaction(
                     montant,
                     TypeTransaction.valueOf(comboType.getValue()),
                     datePicker.getValue(),
                     champDescription.getText().trim(),
                     userId,
-                    1 // catégorie par défaut (sera amélioré)
+                    1
             );
             succes = transactionDAO.creer(nouvelle);
         } else {
-            // ── MODE MODIFICATION ─────────────────────────
             transactionAModifier.setMontant(montant);
             transactionAModifier.setDescription(champDescription.getText().trim());
             transactionAModifier.setType(TypeTransaction.valueOf(comboType.getValue()));
@@ -101,19 +85,24 @@ public class FormTransactionController {
         }
 
         if (succes) {
-            // Appelle le callback pour rafraîchir la liste
             if (onSauvegarde != null) onSauvegarde.run();
-            // Ferme la fenêtre popup
             ((Stage) btnSauvegarder.getScene().getWindow()).close();
         } else {
-            labelMessage.setText("Erreur lors de la sauvegarde.");
-            labelMessage.setStyle("-fx-text-fill: red;");
+            afficherErreur("Erreur lors de la sauvegarde.");
         }
     }
 
-    // ── Annuler ───────────────────────────────────────────
     @FXML
     private void handleAnnuler() {
         ((Stage) btnSauvegarder.getScene().getWindow()).close();
+    }
+
+    // ── Utilitaires CSS ───────────────────────────────────
+    private void afficherErreur(String message) {
+        labelMessage.getStyleClass().removeAll("msg-succes", "msg-info");
+        if (!labelMessage.getStyleClass().contains("msg-erreur")) {
+            labelMessage.getStyleClass().add("msg-erreur");
+        }
+        labelMessage.setText(message);
     }
 }

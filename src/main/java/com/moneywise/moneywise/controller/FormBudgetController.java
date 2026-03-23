@@ -36,12 +36,10 @@ public class FormBudgetController {
     @FXML
     private void handleSauvegarder() {
 
-        // Validation
         if (champMontant.getText().isBlank() ||
                 comboMois.getValue() == null ||
                 champAnnee.getText().isBlank()) {
-            labelMessage.setStyle("-fx-text-fill: red;");
-            labelMessage.setText("Veuillez remplir tous les champs.");
+            afficherErreur("Veuillez remplir tous les champs.");
             return;
         }
 
@@ -52,20 +50,18 @@ public class FormBudgetController {
             annee   = Integer.parseInt(champAnnee.getText().trim());
             if (montant <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            labelMessage.setStyle("-fx-text-fill: red;");
-            labelMessage.setText("Montant ou année invalide.");
+            afficherErreur("Montant ou année invalide.");
             return;
         }
 
-        int userId = SessionManager.getInstance()
-                .getUtilisateurConnecte().getId();
+        int userId = SessionManager.getInstance().getUtilisateurConnecte().getId();
 
         Budget budget = new Budget(
                 montant,
                 comboMois.getValue(),
                 annee,
                 userId,
-                1 // catégorie par défaut
+                1
         );
 
         boolean succes = budgetDAO.creer(budget);
@@ -74,13 +70,21 @@ public class FormBudgetController {
             if (onSauvegarde != null) onSauvegarde.run();
             ((Stage) btnSauvegarder.getScene().getWindow()).close();
         } else {
-            labelMessage.setStyle("-fx-text-fill: red;");
-            labelMessage.setText("Erreur lors de la sauvegarde.");
+            afficherErreur("Erreur lors de la sauvegarde.");
         }
     }
 
     @FXML
     private void handleAnnuler() {
         ((Stage) btnSauvegarder.getScene().getWindow()).close();
+    }
+
+    // ── Utilitaire CSS ────────────────────────────────────
+    private void afficherErreur(String message) {
+        labelMessage.getStyleClass().removeAll("msg-succes", "msg-info");
+        if (!labelMessage.getStyleClass().contains("msg-erreur")) {
+            labelMessage.getStyleClass().add("msg-erreur");
+        }
+        labelMessage.setText(message);
     }
 }

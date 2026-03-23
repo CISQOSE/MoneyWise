@@ -8,59 +8,64 @@
             fx:controller="com.moneywise.moneywise.controller.BudgetController"
             prefWidth="900" prefHeight="600">
 
-    <!-- ══ HAUT ══ -->
+    <!-- NAVBAR -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20"
-              style="-fx-background-color: #1a1a2e; -fx-padding: 15px;">
-            <Label text="💰 MoneyWise"
-                   style="-fx-text-fill: white; -fx-font-size: 20px;
-                          -fx-font-weight: bold;"/>
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              styleClass="navbar" prefHeight="60">
+            <padding><Insets left="24" right="24"/></padding>
+
+            <Label text="MoneyWise" styleClass="navbar-logo"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="🏠 Dashboard"
+
+            <Button text="Dashboard"
+                    styleClass="btn-ghost"
                     onAction="#handleDashboard"
-                    style="-fx-background-color: #4361ee; -fx-text-fill: white;
-                           -fx-background-radius: 6px;"/>
-            <Button text="Déconnexion"
-                    onAction="#handleDeconnexion"
-                    style="-fx-background-color: #e63946; -fx-text-fill: white;
-                           -fx-background-radius: 6px;"/>
+                    style="-fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.4);"/>
+
+            <Button text="Deconnexion"
+                    styleClass="btn-danger"
+                    onAction="#handleDeconnexion"/>
         </HBox>
     </top>
 
-    <!-- ══ CENTRE ══ -->
+    <!-- CONTENU -->
     <center>
-        <VBox spacing="20"
-              style="-fx-padding: 25px; -fx-background-color: #f0f2f5;">
+        <VBox spacing="20" styleClass="content-area">
 
-            <!-- Titre + bouton Ajouter -->
-            <HBox alignment="CENTER_LEFT" spacing="15">
-                <Label text="🎯 Mes Budgets"
-                       style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+            <!-- En-tete -->
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <VBox spacing="4">
+                    <Label text="Mes Budgets" styleClass="page-titre"/>
+                    <Label text="Definissez vos limites de depenses par categorie"
+                           style="-fx-text-fill: #5A7A6A; -fx-font-size: 13px;"/>
+                </VBox>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button text="+ Ajouter un budget"
                         onAction="#handleAjouter"
-                        style="-fx-background-color: #4361ee; -fx-text-fill: white;
-                               -fx-background-radius: 6px; -fx-padding: 10px 15px;"/>
+                        styleClass="btn-primary"/>
             </HBox>
 
-            <!-- Tableau des budgets -->
+            <!-- Tableau -->
             <TableView fx:id="tableBudgets" VBox.vgrow="ALWAYS"
-                       style="-fx-background-color: white;
-                              -fx-background-radius: 10px;">
+                       styleClass="table-view">
                 <columns>
                     <TableColumn fx:id="colMois"
-                                 text="Mois" prefWidth="120"/>
+                                 text="Mois" prefWidth="130"/>
                     <TableColumn fx:id="colAnnee"
-                                 text="Année" prefWidth="80"/>
+                                 text="Annee" prefWidth="90"/>
                     <TableColumn fx:id="colMontantMax"
-                                 text="Budget Max" prefWidth="130"/>
+                                 text="Budget Max" prefWidth="140"/>
                     <TableColumn fx:id="colDepenses"
-                                 text="Dépenses" prefWidth="130"/>
+                                 text="Depenses" prefWidth="140"/>
                     <TableColumn fx:id="colPourcentage"
-                                 text="Utilisation" prefWidth="150"/>
+                                 text="Utilisation" prefWidth="140"/>
                     <TableColumn fx:id="colActions"
-                                 text="Actions" prefWidth="120"/>
+                                 text="Actions" prefWidth="100"/>
                 </columns>
+                <placeholder>
+                    <Label text="Aucun budget defini pour le moment."
+                           style="-fx-text-fill: #9AB5A8; -fx-font-size: 14px;"/>
+                </placeholder>
             </TableView>
 
         </VBox>

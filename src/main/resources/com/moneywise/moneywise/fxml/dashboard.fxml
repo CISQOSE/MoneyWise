@@ -9,135 +9,105 @@
             fx:controller="com.moneywise.moneywise.controller.DashboardController"
             prefWidth="900" prefHeight="600">
 
-    <!-- ══ HAUT : barre de navigation ══ -->
+    <!-- NAVBAR -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20"
-              style="-fx-background-color: #1a1a2e; -fx-padding: 15px;">
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              styleClass="navbar" prefHeight="60">
+            <padding><Insets left="24" right="24"/></padding>
 
-            <Label text="💰 MoneyWise"
-                   style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
-
-            <!-- Espace flexible -->
+            <Label text="MoneyWise" styleClass="navbar-logo"/>
             <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="labelBienvenue" styleClass="navbar-user"/>
 
-            <Label fx:id="labelBienvenue"
-                   style="-fx-text-fill: white; -fx-font-size: 14px;"/>
-
-            <Button text="Déconnexion"
-                    onAction="#handleDeconnexion"
-                    style="-fx-background-color: #e63946; -fx-text-fill: white;
-                           -fx-background-radius: 6px;"/>
+            <Button text="Deconnexion"
+                    styleClass="btn-danger"
+                    onAction="#handleDeconnexion"/>
         </HBox>
     </top>
 
-    <!-- ══ GAUCHE : menu latéral ══ -->
+    <!-- SIDEBAR -->
     <left>
-        <VBox spacing="5"
-              style="-fx-background-color: #16213e; -fx-padding: 20px;"
-              prefWidth="180">
+        <VBox styleClass="sidebar">
 
-            <Label text="MENU"
-                   style="-fx-text-fill: #666; -fx-font-size: 11px;"/>
+            <Label text="NAVIGATION" styleClass="sidebar-section-title"/>
 
-            <Button text="📊 Dashboard"
+            <Button text="Dashboard"
+                    styleClass="menu-btn, menu-btn-active"
+                    maxWidth="Infinity"/>
+
+            <Button text="Transactions"
+                    styleClass="menu-btn"
                     maxWidth="Infinity"
-                    style="-fx-background-color: #4361ee; -fx-text-fill: white;
-                           -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                    onAction="#handleTransactions"/>
 
-            <Button text="💸 Transactions"
+            <Button text="Budgets"
+                    styleClass="menu-btn"
                     maxWidth="Infinity"
-                    onAction="#handleTransactions"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;
-                           -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                    onAction="#handleBudgets"/>
 
-            <Button text="🎯 Budgets"
+            <Button text="Export"
+                    styleClass="menu-btn"
                     maxWidth="Infinity"
-                    onAction="#handleBudgets"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;
-                           -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                    onAction="#handleExport"/>
 
-            <Button text="📤 Export"
-                    maxWidth="Infinity"
-                    onAction="#handleExport"
-                    style="-fx-background-color: transparent; -fx-text-fill: white;
-                           -fx-background-radius: 6px; -fx-padding: 10px;"/>
+            <Region VBox.vgrow="ALWAYS"/>
 
-            <Button text="⚙️ Admin"
+            <Button fx:id="btnAdmin"
+                    text="Administration"
+                    styleClass="menu-btn"
                     maxWidth="Infinity"
                     onAction="#handleAdmin"
-                    style="-fx-background-color: #f4a261; -fx-text-fill: white;
-               -fx-background-radius: 6px; -fx-padding: 10px;"/>
+                    visible="false" managed="false"/>
+
         </VBox>
     </left>
 
-    <!-- ══ CENTRE : contenu principal ══ -->
+    <!-- CONTENU -->
     <center>
-        <VBox spacing="20" style="-fx-padding: 25px; -fx-background-color: #f0f2f5;">
+        <VBox fx:id="contentRoot" spacing="20" styleClass="content-area">
 
-            <!-- Cartes résumé -->
-            <HBox spacing="15">
+            <!-- Alertes -->
+            <VBox fx:id="zoneAlertes" spacing="8"
+                  managed="false" visible="false"/>
 
-                <!-- Carte Solde -->
-                <VBox styleClass="carte-stat" HBox.hgrow="ALWAYS"
-                      style="-fx-background-color: white; -fx-padding: 20px;
-                             -fx-background-radius: 10px;">
-                    <Label text="💰 Solde actuel"
-                           style="-fx-text-fill: #666; -fx-font-size: 13px;"/>
-                    <Label fx:id="labelSolde" text="0.00 €"
-                           style="-fx-font-size: 24px; -fx-font-weight: bold;
-                                  -fx-text-fill: #1a1a2e;"/>
+            <!-- Cartes -->
+            <HBox spacing="16">
+
+                <VBox styleClass="card, card-solde" HBox.hgrow="ALWAYS">
+                    <Label text="Solde actuel" styleClass="card-titre"/>
+                    <Region prefHeight="8"/>
+                    <Label fx:id="labelSolde" text="0,00 €"
+                           styleClass="card-valeur, valeur-solde"/>
                 </VBox>
 
-                <!-- Carte Revenus -->
-                <VBox styleClass="carte-stat" HBox.hgrow="ALWAYS"
-                      style="-fx-background-color: white; -fx-padding: 20px;
-                             -fx-background-radius: 10px;">
-                    <Label text="📈 Revenus"
-                           style="-fx-text-fill: #666; -fx-font-size: 13px;"/>
-                    <Label fx:id="labelRevenus" text="0.00 €"
-                           style="-fx-font-size: 24px; -fx-font-weight: bold;
-                                  -fx-text-fill: #2dc653;"/>
+                <VBox styleClass="card, card-revenu" HBox.hgrow="ALWAYS">
+                    <Label text="Revenus" styleClass="card-titre"/>
+                    <Region prefHeight="8"/>
+                    <Label fx:id="labelRevenus" text="0,00 €"
+                           styleClass="card-valeur, valeur-revenu"/>
                 </VBox>
 
-                <!-- Carte Dépenses -->
-                <VBox styleClass="carte-stat" HBox.hgrow="ALWAYS"
-                      style="-fx-background-color: white; -fx-padding: 20px;
-                             -fx-background-radius: 10px;">
-                    <Label text="📉 Dépenses"
-                           style="-fx-text-fill: #666; -fx-font-size: 13px;"/>
-                    <Label fx:id="labelDepenses" text="0.00 €"
-                           style="-fx-font-size: 24px; -fx-font-weight: bold;
-                                  -fx-text-fill: #e63946;"/>
+                <VBox styleClass="card, card-depense" HBox.hgrow="ALWAYS">
+                    <Label text="Depenses" styleClass="card-titre"/>
+                    <Region prefHeight="8"/>
+                    <Label fx:id="labelDepenses" text="0,00 €"
+                           styleClass="card-valeur, valeur-depense"/>
                 </VBox>
-
 
             </HBox>
 
-            <!-- ══ Zone des alertes ══ -->
-            <VBox fx:id="zoneAlertes" spacing="8" managed="false" visible="false"/>
-
             <!-- Graphiques -->
-            <HBox spacing="15" VBox.vgrow="ALWAYS">
+            <HBox spacing="16" VBox.vgrow="ALWAYS">
 
-                <!-- BarChart : Revenus vs Dépenses -->
-                <BarChart fx:id="barChart"
-                          HBox.hgrow="ALWAYS"
-                          style="-fx-background-color: white;
-                                 -fx-background-radius: 10px;">
-                    <xAxis>
-                        <CategoryAxis label="Mois"/>
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis label="Montant (€)"/>
-                    </yAxis>
+                <BarChart fx:id="barChart" HBox.hgrow="ALWAYS"
+                          styleClass="card" animated="true">
+                    <xAxis><CategoryAxis label="Mois"/></xAxis>
+                    <yAxis><NumberAxis label="Montant (E)"/></yAxis>
                 </BarChart>
 
-                <!-- PieChart : Dépenses par catégorie -->
-                <PieChart fx:id="pieChart"
-                          HBox.hgrow="ALWAYS"
-                          style="-fx-background-color: white;
-                                 -fx-background-radius: 10px;"
-                          title="Dépenses par catégorie"/>
+                <PieChart fx:id="pieChart" HBox.hgrow="ALWAYS"
+                          styleClass="card" animated="true"
+                          title="Repartition"/>
 
             </HBox>
 

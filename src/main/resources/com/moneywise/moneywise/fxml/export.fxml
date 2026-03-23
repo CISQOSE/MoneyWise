@@ -8,61 +8,62 @@
             fx:controller="com.moneywise.moneywise.controller.ExportController"
             prefWidth="900" prefHeight="600">
 
+    <!-- NAVBAR -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20"
-              style="-fx-background-color: #1a1a2e; -fx-padding: 15px;">
-            <Label text="💰 MoneyWise"
-                   style="-fx-text-fill: white; -fx-font-size: 20px;
-                          -fx-font-weight: bold;"/>
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              styleClass="navbar" prefHeight="60">
+            <padding><Insets left="24" right="24"/></padding>
+
+            <Label text="MoneyWise" styleClass="navbar-logo"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="🏠 Dashboard"
+
+            <Button text="Dashboard"
+                    styleClass="btn-ghost"
                     onAction="#handleDashboard"
-                    style="-fx-background-color: #4361ee; -fx-text-fill: white;
-                           -fx-background-radius: 6px;"/>
+                    style="-fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.4);"/>
         </HBox>
     </top>
 
+    <!-- CONTENU -->
     <center>
-        <VBox spacing="30" alignment="CENTER"
-              style="-fx-padding: 50px; -fx-background-color: #f0f2f5;">
+        <VBox spacing="24" alignment="TOP_CENTER"
+              styleClass="content-area">
 
-            <Label text="📤 Exporter mes données"
-                   style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
-
-            <Label fx:id="labelInfo" text=""
-                   style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
-
-            <!-- Carte PDF -->
-            <VBox spacing="10" alignment="CENTER"
-                  style="-fx-background-color: white; -fx-padding: 30px;
-                         -fx-background-radius: 10px; -fx-pref-width: 400px;">
-                <Label text="📄 Export PDF"
-                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <Label text="Génère un rapport PDF de toutes vos transactions"
-                       style="-fx-text-fill: #666;"/>
-                <Button text="Exporter en PDF"
-                        onAction="#handleExportPDF"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #e63946; -fx-text-fill: white;
-                               -fx-background-radius: 6px; -fx-padding: 12px;
-                               -fx-font-size: 14px;"/>
+            <!-- En-tete -->
+            <VBox spacing="4" alignment="CENTER">
+                <Label text="Exporter mes donnees" styleClass="page-titre"/>
+                <Label fx:id="labelInfo" text=""
+                       style="-fx-text-fill: #5A7A6A; -fx-font-size: 13px;"/>
             </VBox>
 
-            <!-- Carte Excel -->
-            <VBox spacing="10" alignment="CENTER"
-                  style="-fx-background-color: white; -fx-padding: 30px;
-                         -fx-background-radius: 10px; -fx-pref-width: 400px;">
-                <Label text="📊 Export Excel"
-                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <Label text="Génère un fichier Excel avec vos données financières"
-                       style="-fx-text-fill: #666;"/>
-                <Button text="Exporter en Excel"
-                        onAction="#handleExportExcel"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #2dc653; -fx-text-fill: white;
-                               -fx-background-radius: 6px; -fx-padding: 12px;
-                               -fx-font-size: 14px;"/>
-            </VBox>
+            <!-- Cartes export -->
+            <HBox spacing="20" alignment="CENTER">
+
+                <!-- Carte PDF -->
+                <VBox spacing="14" styleClass="export-card">
+                    <Label text="Export PDF" styleClass="export-card-titre"/>
+                    <Label text="Genere un rapport PDF complet de toutes vos transactions avec totaux et solde."
+                           styleClass="export-card-desc"/>
+                    <Region prefHeight="4"/>
+                    <Button text="Exporter en PDF"
+                            onAction="#handleExportPDF"
+                            maxWidth="Infinity"
+                            styleClass="btn-danger"/>
+                </VBox>
+
+                <!-- Carte Excel -->
+                <VBox spacing="14" styleClass="export-card">
+                    <Label text="Export Excel" styleClass="export-card-titre"/>
+                    <Label text="Genere un fichier Excel (.xlsx) avec vos donnees financieres colorisees."
+                           styleClass="export-card-desc"/>
+                    <Region prefHeight="4"/>
+                    <Button text="Exporter en Excel"
+                            onAction="#handleExportExcel"
+                            maxWidth="Infinity"
+                            styleClass="btn-primary"/>
+                </VBox>
+
+            </HBox>
 
         </VBox>
     </center>
