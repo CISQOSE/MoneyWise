@@ -17,6 +17,7 @@ module com.moneywise.moneywise {
 
     // ── driver MySQL ──────────────────────────────────────
     requires mysql.connector.j;
+    requires org.testng;
 
     // ── Accès par réflexion (JavaFX en a besoin) ────
     opens com.moneywise.moneywise to javafx.fxml, javafx.graphics;

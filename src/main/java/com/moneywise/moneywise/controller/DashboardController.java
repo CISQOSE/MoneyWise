@@ -141,6 +141,11 @@ public class DashboardController {
     }
 
     @FXML
+    private void handleBudgets() {
+        SceneManager.getInstance().allerVersBudgets();
+    }
+
+    @FXML
     private void handleAdmin() {
         // Vérifie que l'utilisateur est admin avant de naviguer
         if (SessionManager.getInstance().estAdmin()) {

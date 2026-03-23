@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.moneywise.moneywise.controller.FormBudgetController"
+      spacing="15" prefWidth="400"
+      style="-fx-padding: 30px; -fx-background-color: white;">
+
+    <Label text="Nouveau Budget"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <Label text="Montant maximum (€)" style="-fx-font-weight: bold;"/>
+    <TextField fx:id="champMontant"
+               promptText="Ex: 500.00"
+               styleClass="champ-saisie"/>
+
+    <Label text="Mois" style="-fx-font-weight: bold;"/>
+    <ComboBox fx:id="comboMois" maxWidth="Infinity"/>
+
+    <Label text="Année" style="-fx-font-weight: bold;"/>
+    <TextField fx:id="champAnnee"
+               promptText="Ex: 2026"
+               styleClass="champ-saisie"/>
+
+    <Label fx:id="labelMessage" text=""/>
+
+    <HBox spacing="10">
+        <Button fx:id="btnSauvegarder"
+                text="Sauvegarder"
+                onAction="#handleSauvegarder"
+                maxWidth="Infinity"
+                HBox.hgrow="ALWAYS"
+                style="-fx-background-color: #4361ee; -fx-text-fill: white;
+                       -fx-background-radius: 6px; -fx-padding: 10px;"/>
+        <Button text="Annuler"
+                onAction="#handleAnnuler"
+                maxWidth="Infinity"
+                HBox.hgrow="ALWAYS"
+                style="-fx-background-color: #e63946; -fx-text-fill: white;
+                       -fx-background-radius: 6px; -fx-padding: 10px;"/>
+    </HBox>
+
+</VBox>

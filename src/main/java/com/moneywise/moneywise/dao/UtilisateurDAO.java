@@ -105,13 +105,14 @@ public class UtilisateurDAO {
     //  UPDATE — Modifier un utilisateur
     // ══════════════════════════════════════════════
     public boolean modifier(Utilisateur u) {
-        String sql = "UPDATE utilisateur SET nom=?, email=?, est_actif=? WHERE id=?";
+        String sql = "UPDATE utilisateur SET nom=?, email=?, est_actif=?, est_admin=? WHERE id=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, u.getNom());
             stmt.setString(2, u.getEmail());
             stmt.setBoolean(3, u.isEstActif());
-            stmt.setInt(4, u.getId());
+            stmt.setBoolean(4, u.isEstAdmin());
+            stmt.setInt(5, u.getId());
 
             return stmt.executeUpdate() > 0;
 
